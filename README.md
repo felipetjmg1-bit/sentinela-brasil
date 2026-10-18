@@ -24,7 +24,7 @@ Demonstrar, em execução local, como aplicar controles explícitos de acesso a 
 - **Trusted AI Gateway demonstrativo:** detecção heurística de padrões de e-mail, CPF-like e credenciais; modo estrito bloqueia padrões detectados e modo `redact` mascara; nenhuma API/modelo externo é chamado.
 - **Perfil defensivo de ativos:** cadastro e leitura de inventário sintético sem conexão a redes ou dispositivos.
 - **Painel web local:** autenticação, contagens, eventos recentes, estado da cadeia e inventário; HTML seguro por `textContent`, sessão mantida em `sessionStorage` e cabeçalhos básicos.
-- **Qualidade:** pytest, workflow GitHub Actions, lint Ruff, auditoria de dependências e geração de artefato SBOM no CI.
+- **Verificações locais:** pytest, lint Ruff, auditoria de dependências e SBOM CycloneDX.
 
 ## Arquitetura
 
@@ -116,7 +116,7 @@ ruff check .
 pip-audit --skip-editable
 ```
 
-Os testes cobrem autenticação, RBAC negativo, isolamento por objeto, cifra e exportação, upload inválido, bloqueio/redação no gateway, detecção de adulteração no ledger, ativos, painel e cabeçalhos. Resultados executados são relatados no registro de entrega; o workflow CI repete verificações em push e pull request. O SBOM CycloneDX é artefato do job CI, não prova de ausência de vulnerabilidades.
+Os testes cobrem autenticação, RBAC negativo, isolamento por objeto, cifra e exportação, upload inválido, bloqueio/redação no gateway, detecção de adulteração no ledger, ativos, painel e cabeçalhos. Os resultados executados estão em [docs/VALIDATION.md](docs/VALIDATION.md). O workflow GitHub Actions ainda não está ativo no repositório remoto; seu arquivo preparado permanece fora do commit público enquanto a permissão de workflow não estiver disponível. O SBOM CycloneDX versionado é um inventário do ambiente testado, não prova de ausência de vulnerabilidades.
 
 ## Segurança, privacidade e modelo de ameaças
 

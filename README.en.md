@@ -24,7 +24,7 @@ Demonstrate locally how explicit access controls, encrypted file storage, verifi
 - **Demonstration AI gateway:** heuristic detection of email, CPF-like identifiers, and credential-like strings; strict mode blocks detected patterns and `redact` masks them. No external model/provider is called.
 - **Defensive asset profile:** synthetic inventory CRUD without connecting to networks or devices.
 - **Local web dashboard:** login, counts, recent events, ledger status, and inventory; safe DOM `textContent`, session token in `sessionStorage`, basic security headers.
-- **Quality automation:** pytest, GitHub Actions, Ruff lint, dependency audit, and a CI CycloneDX SBOM artifact.
+- **Local checks:** pytest, Ruff lint, dependency audit, and a CycloneDX SBOM.
 
 ## Architecture
 
@@ -106,7 +106,7 @@ ruff check .
 pip-audit --skip-editable
 ```
 
-Tests cover authentication, negative RBAC, object isolation, encryption/export, invalid uploads, gateway blocking/redaction, ledger tamper detection, assets, dashboard, and headers. CI repeats checks on pushes and pull requests. Its CycloneDX SBOM is a build artifact, not proof that dependencies are vulnerability-free.
+Tests cover authentication, negative RBAC, object isolation, encryption/export, invalid uploads, gateway blocking/redaction, ledger tamper detection, assets, dashboard, and headers. Executed results are in [docs/VALIDATION.md](docs/VALIDATION.md). GitHub Actions is not yet active in the remote repository; its prepared workflow file remains outside the public commit until workflow permission is available. The checked-in CycloneDX SBOM inventories the tested environment; it is not proof that dependencies are vulnerability-free.
 
 ## Security, privacy, and limitations
 

@@ -21,4 +21,4 @@ Durante desenvolvimento, um teste inicialmente falhou porque a regra de propried
 
 ## Limitações da evidência
 
-O teste de integração usa `TestClient` e não substitui revisão de segurança ou prova de operação em todos os sistemas suportados. A checagem de dependências é uma fotografia temporal. A inicialização de Docker não pôde ser testada; o serviço efetivamente testado foi Uvicorn local. GitHub Actions será executado após publicação do workflow no repositório; seu resultado remoto deve ser registrado quando disponível.
+O teste de integração usa `TestClient` e não substitui revisão de segurança ou prova de operação em todos os sistemas suportados. A checagem de dependências é uma fotografia temporal. A inicialização de Docker não pôde ser testada; o serviço efetivamente testado foi Uvicorn local. O arquivo de workflow GitHub Actions foi preparado localmente, mas não faz parte do commit remoto: o GitHub rejeitou a publicação por falta da permissão `workflows`. Portanto, ainda não há execução de CI remoto.
