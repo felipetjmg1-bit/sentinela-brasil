@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Painel demonstrativo local do Sentinela Brasil">
+  <title>Sentinela Brasil · Painel</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header><h1>Sentinela Brasil</h1><p>Soberania de dados · governança de acesso · IA simulada</p></header>
+<main>
+  <section id="login" class="card" aria-labelledby="login-title">
+    <h2 id="login-title">Acesso local</h2>
+    <p class="muted">Entre com uma conta criada no bootstrap deste ambiente.</p>
+    <form id="login-form"><label for="username">Usuário</label><input id="username" autocomplete="username" required minlength="3">
+      <label for="password">Senha</label><input id="password" type="password" autocomplete="current-password" required>
+      <button type="submit">Entrar</button></form>
+    <p id="login-message" role="status" aria-live="polite"></p>
+  </section>
+  <section id="content" hidden>
+    <div class="card"><button id="logout" class="secondary" type="button">Sair</button><span id="identity" class="muted"></span></div>
+    <div class="notice card">Demonstração local. Indicadores e verificações não são certificação, homologação nem garantia de segurança operacional.</div>
+    <section class="grid" id="metrics" aria-label="Indicadores"></section>
+    <section class="card"><h2>Integridade do ledger</h2><p id="ledger-status"></p><p class="muted">A cadeia de hashes detecta alterações verificadas, mas não oferece imutabilidade absoluta contra quem controla o banco e o host.</p></section>
+    <section class="card"><h2>Eventos recentes</h2><div class="table-wrap"><table><thead><tr><th>Seq.</th><th>Data UTC</th><th>Ação</th><th>Resultado</th><th>Motivo</th></tr></thead><tbody id="events"></tbody></table></div></section>
+    <section class="card"><h2>Inventário de ativos</h2><div id="assets"></div></section>
+  </section>
+  <p id="message" role="status" aria-live="polite"></p>
+</main>
+<script src="/static/app.js" defer></script>
+</body>
+</html>

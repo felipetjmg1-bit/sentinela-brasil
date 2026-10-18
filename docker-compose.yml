@@ -1,0 +1,22 @@
+services:
+  sentinela:
+    build: .
+    env_file:
+      - .env
+    environment:
+      SENTINELA_DATABASE_PATH: /app/data/sentinela.db
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - sentinela_data:/app/data
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+volumes:
+  sentinela_data:
