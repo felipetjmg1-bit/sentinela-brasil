@@ -1,5 +1,7 @@
 # Sentinela Brasil
 
+![Status: Experimental](https://img.shields.io/badge/Status-Experimental-blue) | [![Licença Apache-2.0](https://img.shields.io/github/license/felipetjmg1-bit/sentinela-brasil)](LICENSE) | [![Patrocinar](https://img.shields.io/badge/Sponsor-GitHub%20Sponsors-ea4aaa?logo=githubsponsors)](https://github.com/sponsors/felipetjmg1-bit)
+
 **Plataforma aberta demonstrativa de soberania de dados, cibersegurança defensiva e IA confiável.**
 
 - Organização informada: Impulso Digital Soluções em I.A.
@@ -7,7 +9,6 @@
 - Repositório pretendido: `sentinela-brasil`
 - Versão de software: `0.1.0` (núcleo demonstrativo; não é release de produção)
 - Idiomas: português brasileiro e inglês
-- Licença: Apache-2.0
 
 > **Aviso:** iniciativa independente. Não representa aprovação, certificação, homologação, endosso ou adoção de qualquer órgão governamental, militar ou de infraestrutura crítica. Use exclusivamente dados sintéticos para demonstração. Não é solução pronta para produção nem mecanismo de proteção de sistemas críticos.
 
@@ -99,11 +100,17 @@ Veja [docs/deployment/DEPLOYMENT.md](docs/deployment/DEPLOYMENT.md) para backup,
 
 Depois do primeiro início:
 
+``
+
 ```bash
+bash
 curl -s http://127.0.0.1:8000/api/auth/login \
   -H 'Content-Type: application/json' \
   -d '{"username":"admin","password":"SUA_SENHA_LOCAL"}'
+
 ```
+
+``
 
 Use o `access_token` retornado como `Authorization: Bearer <token>` em `/api/dashboard`, `/api/policies` e `/api/assets`. O gateway local pode ser testado em `POST /api/ai/evaluate` com `{"prompt":"Texto sintético de demonstração","mode":"strict"}`. Nenhuma inferência real ocorre. A documentação da API local está em `/docs`.
 
@@ -131,6 +138,16 @@ SQLite local, um único processo e sem alta disponibilidade/multi-tenant; tokens
 O projeto é uma iniciativa aberta brasileira de pesquisa e desenvolvimento sobre soberania de dados, segurança defensiva e governança de IA. Aplicações potenciais em organizações públicas, pesquisa e infraestrutura crítica requerem avaliação, adequação jurídica, controles operacionais e validação independente antes de qualquer uso real. Não há alegação de adoção institucional.
 
 Roadmap sugerido: (1) revisão independente de segurança e acessibilidade; (2) migrações testadas, revogação de sessão, rate limit e autorização por objeto ampliada; (3) KMS/HSM e rotação de chave; (4) âncoras externas/WORM e backup/restore exercitados; (5) avaliação de privacidade, desempenho e conformidade aplicável; (6) somente então avaliar integrações opcionais sob aprovação e controles de minimização.
+
+## Patrocínio e apoio
+
+O desenvolvimento aberto exige tempo para manutenção, documentação, testes, revisão de contribuições e resposta a issues. Se este projeto for útil para você ou sua organização, considere apoiar o mantenedor pelo [GitHub Sponsors](https://github.com/sponsors/felipetjmg1-bit). O apoio ajuda a sustentar a continuidade do trabalho; não representa promessa de funcionalidades, prazo de entrega ou suporte comercial.
+
+[![Patrocinar felipetjmg1-bit](https://img.shields.io/badge/Patrocinar%20no-GitHub%20Sponsors-ea4aaa?logo=githubsponsors)](https://github.com/sponsors/felipetjmg1-bit)
+
+## Licença
+
+Este projeto está sob a licença Apache-2.0; consulte [LICENSE](LICENSE) e [NOTICE](NOTICE).
 
 ## Contribuições e contato
 

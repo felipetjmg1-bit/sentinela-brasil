@@ -12,3 +12,16 @@ htmlcov/
 *.sqlite*
 *.log
 .DS_Store
+
+# Arquivos locais e artefatos de desenvolvimento
+Thumbs.db
+.mypy_cache/
+dist/
+build/
+!.env.example
+node_modules/
+.vite/
+.next/
+.turbo/
+coverage/
+!.env.local.example
