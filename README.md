@@ -88,3 +88,9 @@ A existência dos testes não significa que tenham sido executados nesta PR. Con
 ## Licença
 
 Apache-2.0. Consulte [LICENSE](LICENSE).
+
+
+## Validação e segurança
+
+- [Plano de validação de segurança](docs/SECURITY-VALIDATION-PLAN.md)
+- [Workflow CI de API e segurança](.github/workflows/portfolio-ci.yml)
