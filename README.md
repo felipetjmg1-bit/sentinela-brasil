@@ -1,5 +1,11 @@
 # Sentinela Brasil
 
+
+<p align="center">
+  <img src="PROJECT-OVERVIEW.svg" alt="Diagrama de funcionalidades de Sentinela Brasil" width="100%">
+</p>
+
+
 **[Protótipo funcional / demonstração local]** API FastAPI e painel web para demonstrar controles de governança de dados, autorização, armazenamento cifrado e auditoria. **Não é solução de produção nem mecanismo homologado para infraestrutura crítica.**
 
 ## Problema e objetivo
@@ -94,3 +100,8 @@ Apache-2.0. Consulte [LICENSE](LICENSE).
 
 - [Plano de validação de segurança](docs/SECURITY-VALIDATION-PLAN.md)
 - [Workflow CI de API e segurança](.github/workflows/portfolio-ci.yml)
+
+
+---
+
+**Empresa responsável:** Impulso Digital Soluções em IA.
