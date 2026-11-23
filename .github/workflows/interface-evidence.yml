@@ -1,0 +1,84 @@
+name: Sentinela Brasil live interface evidence
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sentinela-live-interface-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  interface:
+    name: Install, test, launch and capture real dashboard
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SENTINELA_DATABASE_PATH: /tmp/sentinela-ci/sentinela.db
+      SENTINELA_BOOTSTRAP_ADMIN_USERNAME: ci-admin
+      SENTINELA_BOOTSTRAP_ADMIN_PASSWORD: "CI-Demo-Only-Password-2026!"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install project and browser dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e '.[test]'
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Create ephemeral CI secrets
+        run: |
+          mkdir -p /tmp/sentinela-ci
+          python - <<'PY' >> "$GITHUB_ENV"
+          import secrets
+          from cryptography.fernet import Fernet
+          print("SENTINELA_TOKEN_SECRET=" + secrets.token_urlsafe(48))
+          print("SENTINELA_VAULT_KEY=" + Fernet.generate_key().decode())
+          PY
+      - name: Run automated tests
+        run: python -m pytest -q
+      - name: Start real FastAPI application
+        run: |
+          nohup python -m uvicorn sentinela.main:app --app-dir src --host 127.0.0.1 --port 8000 > /tmp/sentinela-ci/server.log 2>&1 &
+          echo $! > /tmp/sentinela-ci/server.pid
+          python - <<'PY'
+          import time
+          import urllib.request
+          url = "http://127.0.0.1:8000/api/health"
+          for _ in range(60):
+              try:
+                  with urllib.request.urlopen(url, timeout=2) as response:
+                      if response.status == 200:
+                          print(response.read().decode())
+                          break
+              except Exception:
+                  time.sleep(2)
+          else:
+              print(open("/tmp/sentinela-ci/server.log", encoding="utf-8").read())
+              raise SystemExit("Sentinela did not become ready.")
+          PY
+      - name: Verify login and capture real desktop/mobile dashboard
+        run: python scripts/capture-interface.py
+      - name: Stop application
+        if: always()
+        run: |
+          if [ -f /tmp/sentinela-ci/server.pid ]; then kill "$(cat /tmp/sentinela-ci/server.pid)" || true; fi
+      - name: Upload real interface screenshots and server log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sentinela-brasil-real-interface
+          path: |
+            artifacts/interface/
+            /tmp/sentinela-ci/server.log
+          if-no-files-found: warn
+          retention-days: 30
