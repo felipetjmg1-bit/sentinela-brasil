@@ -110,3 +110,9 @@ Apache-2.0. Consulte [LICENSE](LICENSE).
 ## Fluxo passo a passo
 
 Consulte o [guia textual com as etapas do projeto](docs/PROCESSO-PASSO-A-PASSO.md). O infográfico acima resume visualmente o mesmo fluxo.
+
+
+## Evidência de interface real
+
+- [Workflow de execução e capturas com Playwright](.github/workflows/interface-evidence.yml)
+- [Critérios e limites das evidências](docs/INTERFACE-EVIDENCE.md)
